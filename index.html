@@ -493,9 +493,9 @@ const SHEETS_CONFIG = {
 // As linhas 3-12 têm os funcionários; colunas C(jan/25) até Q(mar/26) etc.
 // O mapeamento de colunas é fixo: C=jan/25, D=fev/25 ... Q=mar/26, R=abr/26...
 const SHEET_TABS = {
-  0: 'SJP 1 - Loja São José',
+  0: 'SJP 1 - Loja S\u00e3o Jos\u00e9',
   1: 'MGA 3 - Loja Avenida',
-  2: 'CTBA 3 - Loja Estação',
+  2: 'CTBA 3 - Loja Esta\u00e7\u00e3o',
   3: 'MGA 5 - Loja Cidade',
   4: 'CTBA 5 - Loja Jockey',
   5: 'CL 2 - Outlet Campo Largo',
@@ -843,6 +843,7 @@ async function confirmarSheets() {
     if (!SHEETS_CONFIG.spreadsheetId || SHEETS_CONFIG.spreadsheetId === 'COLE_AQUI_O_ID_DA_PLANILHA') throw new Error('ID da planilha não configurado.');
 
     sendMsg.textContent = 'Gravando saldos na planilha...';
+    console.log('sheetTab:', sheetTab, '| col:', col, '| employees:', resultEmployees.map(e=>({nome:e.nome,linha:e.linha,bhMin:e.bhMin})));
     await writeToSheets(token, sheetTab, col, resultEmployees);
 
     sending.classList.remove('active');
