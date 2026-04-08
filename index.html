@@ -822,9 +822,10 @@ async function writeToSheets(token, sheetTab, col, employees) {
     const abs = Math.abs(totalMin);
     const h = Math.floor(abs / 60);
     const m = abs % 60;
-    const valStr = neg
-      ? `-"${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}"`
-      : `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`;
+    const hh = String(h).padStart(2,'0');
+    const mm = String(m).padStart(2,'0');
+    // Formato exato usado na planilha: negativo = =-"HH:MM", positivo = HH:MM como texto
+    const valStr = neg ? `=-"${hh}:${mm}"` : `${hh}:${mm}`;
     return {
       range: cellRef,
       values: [[valStr]]
